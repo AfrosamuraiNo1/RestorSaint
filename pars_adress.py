@@ -1,24 +1,26 @@
 from cgitb import html
+from signal import pause
 import requests
 from bs4 import BeautifulSoup as BS
 import csv
-from all_web import all_web
-
+import time
+#from all_web import data_link
 
 CSV = 'adress.csv'
 
 HOST = 'https://www.restoclub.ru'
-URL = 'https://www.restoclub.ru/spb/place/settlers'
+#URL = 'https://www.restoclub.ru/spb/place/big-gvozdec'
 HEADERS = {
     'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
     'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:105.0) Gecko/20100101 Firefox/105.0'
 }
 
+
 def get_html(url, params=''):
-    r = requests.get(url, headers=HEADERS, params=params)
+    r = requests.get(url, timeout=5, headers=HEADERS, params=params)
     return r
 
-def get_content(html):
+def get_content(html): 
     soup = BS(html, 'html.parser')
     items = soup.find_all('div', class_='page__wrapper')
     adress = []
@@ -31,10 +33,6 @@ def get_content(html):
         )
     return adress
 
-#html = get_html(URL)
-#print(get_content(html.text))
-
-
 def save_doc(items, path):
     with open(path, 'w', newline='') as file:
         writer = csv.writer(file, delimiter=';')
@@ -44,13 +42,16 @@ def save_doc(items, path):
 
 
 def parser():
-    html = get_html(URL)
-    if html.status_code == 200:
-        adress = []
-        adress.extend(get_content(html.text))
-        save_doc(adress, CSV)
-        print('Создана точка.')    
-    else:
-        print('Error')
+    adress = []
+    URL = ['https://www.restoclub.ru/spb/place/big-gvozdec', 'https://www.restoclub.ru/spb/place/delice-3', 'https://www.restoclub.ru/spb/place/1-2-of-you-3']
+    for url in URL:
+        html = get_html(url)
+        if html.status_code == 200:
+            adress.extend(get_content(html.text))
+            print('Создана точка.')    
+        else:
+            print('Error')
+        time.sleep(1)
+    save_doc(adress, CSV)
 
 parser()
