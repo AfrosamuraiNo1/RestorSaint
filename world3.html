@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<head>    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_6002f1927e4300f2401014e877022301 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+            </style>
+        
+</head>
+<body>    
+    
+            <div class="folium-map" id="map_6002f1927e4300f2401014e877022301" ></div>
+        
+</body>
+<script>    
+    
+            var map_6002f1927e4300f2401014e877022301 = L.map(
+                "map_6002f1927e4300f2401014e877022301",
+                {
+                    center: [59.939099, 30.315877],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 10,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_ac336c44e150104db96d50d07f071aeb = L.tileLayer(
+                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "Data by \u0026copy; \u003ca href=\"http://openstreetmap.org\"\u003eOpenStreetMap\u003c/a\u003e, under \u003ca href=\"http://www.openstreetmap.org/copyright\"\u003eODbL\u003c/a\u003e.", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            ).addTo(map_6002f1927e4300f2401014e877022301);
+        
+    
+            var marker_806388fddd1f3f322bcb2219b1a4f031 = L.marker(
+                [59.939099, 30.315877],
+                {}
+            ).addTo(map_6002f1927e4300f2401014e877022301);
+        
+    
+        var popup_0bf148faf13ed3f7293744785775e58b = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_0a40ab918cc949641edeb7d78b1095f7 = $(`<div id="html_0a40ab918cc949641edeb7d78b1095f7" style="width: 100.0%; height: 100.0%;">Санкт-Петербург_</div>`)[0];
+                popup_0bf148faf13ed3f7293744785775e58b.setContent(html_0a40ab918cc949641edeb7d78b1095f7);
+            
+        
+
+        marker_806388fddd1f3f322bcb2219b1a4f031.bindPopup(popup_0bf148faf13ed3f7293744785775e58b)
+        ;
+
+        
+    
+    
+            marker_806388fddd1f3f322bcb2219b1a4f031.bindTooltip(
+                `<div>
+                     Санкт-Петербург
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_7c4f367c9f22c9f949edf5e875dc3aba = L.marker(
+                [60.0712695, 30.239394751678446],
+                {}
+            ).addTo(map_6002f1927e4300f2401014e877022301);
+        
+    
+        var popup_02623d0c61773d9559214a4f620bb382 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_89c910ad6216df2f308d0e881ad0f95b = $(`<div id="html_89c910ad6216df2f308d0e881ad0f95b" style="width: 100.0%; height: 100.0%;">10 к1, Тихоокеанская улица, Парголово, Санкт-Петербург, Северо-Западный федеральный округ, 194362, Россия</div>`)[0];
+                popup_02623d0c61773d9559214a4f620bb382.setContent(html_89c910ad6216df2f308d0e881ad0f95b);
+            
+        
+
+        marker_7c4f367c9f22c9f949edf5e875dc3aba.bindPopup(popup_02623d0c61773d9559214a4f620bb382)
+        ;
+
+        
+    
+    
+            marker_7c4f367c9f22c9f949edf5e875dc3aba.bindTooltip(
+                `<div>
+                     Санкт-Петербург
+                 </div>`,
+                {"sticky": true}
+            );
+        
+</script>

@@ -13,5 +13,9 @@ def geo_point(addres):
     geolocator = Nominatim(user_agent='Afro$amuraiNo1')
     geocode = partial(geolocator.geocode,  language='RU')
     location = geolocator.geocode("Тихоокеанская ул., 10, Санкт-Петербург")
-    print(location.address)
-    print((location.latitude, location.longitude))
+    loc = (location.address)
+    point = ((location.latitude, location.longitude))
+    print(loc)
+    print(point)
+    
+
