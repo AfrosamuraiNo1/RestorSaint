@@ -4,7 +4,7 @@ import requests
 from bs4 import BeautifulSoup as BS
 import csv
 import time
-#from all_web import data_link
+from all_web import data_link
 
 CSV = 'adress.csv'
 
@@ -43,7 +43,7 @@ def save_doc(items, path):
 
 def parser():
     adress = []
-    URL = ['https://www.restoclub.ru/spb/place/big-gvozdec', 'https://www.restoclub.ru/spb/place/delice-3', 'https://www.restoclub.ru/spb/place/1-2-of-you-3']
+    URL = data_link()
     for url in URL:
         html = get_html(url)
         if html.status_code == 200:
