@@ -28,5 +28,5 @@ def data_address(): # Эта функция должна обрабатыват�
                 city_data.append(address)
         return city_data
 
-print(data_address())
+
  
