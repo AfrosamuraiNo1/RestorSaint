@@ -9,7 +9,6 @@ from all_web import data_link
 CSV = 'adress.csv'
 
 HOST = 'https://www.restoclub.ru'
-#URL = 'https://www.restoclub.ru/spb/place/big-gvozdec'
 HEADERS = {
     'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
     'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:105.0) Gecko/20100101 Firefox/105.0'
@@ -28,7 +27,8 @@ def get_content(html):
     for item in items:
         adress.append(
             {
-                'title': item.find('div', class_='place-map').get('data-address')
+                'title': item.find('div', class_='place-map').get('data-address'),
+                'about': item.find('div', class_='expandable-text__t').get_text()
             }
         )
     return adress
@@ -36,9 +36,9 @@ def get_content(html):
 def save_doc(items, path):
     with open(path, 'w', newline='') as file:
         writer = csv.writer(file, delimiter=';')
-        writer.writerow(['Адрес заведения'])
+        writer.writerow(['Адрес заведения','Описание заведения'])
         for item in items:
-            writer.writerow([item['title']])
+            writer.writerow([item['title'], item['about']])
 
 
 def parser():
@@ -53,5 +53,3 @@ def parser():
             print('Error')
         time.sleep(1)
     save_doc(adress, CSV)
-
-parser()

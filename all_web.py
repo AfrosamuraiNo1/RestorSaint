@@ -27,6 +27,4 @@ def data_address(): # Эта функция должна обрабатыват�
                 address = address.lstrip() + ', Санкт-Петербург'
                 city_data.append(address)
         return city_data
-
-print(data_address())
  
