@@ -27,7 +27,7 @@ def get_content(html):
     for item in items:
         adress.append(
             {
-                'title': item.find('div', class_='place-map').get('data-address'),
+                'title': item.find('div', class_='place-map').get('data-address'), 
                 'about': item.find('div', class_='expandable-text__t').get_text()
             }
         )
