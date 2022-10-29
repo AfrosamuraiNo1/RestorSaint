@@ -23,7 +23,7 @@ def map_marker():
     city = folium.Map(location=[59.939099, 30.315877],zoom_start=11)
     for markers in marker:
         folium.Marker(location=markers, icon=folium.Icon(color='green')).add_to(city)
-    return city.save('restaurants-spb.html')
+    return city.save('../tempalates/restaurants-spb.html')
 
         
 

@@ -1,5 +1,3 @@
-
-from cgitb import html
 import requests
 from bs4 import BeautifulSoup as BS
 import csv
@@ -38,7 +36,7 @@ def get_content(html):
 def save_doc(items, path):
     with open(path, 'w', newline='') as file:
         writer = csv.writer(file, delimiter=';')
-        writer.writerow(['Название заведения', 'Ссылка на заведение', "Инофрмация о заведение", "Лого заведения"])
+        writer.writerow(['Название заведения', 'Ссылка на заведение', "Информация о заведение", "Лого заведения"])
         for item in items:
             writer.writerow([item['title'], item['link_restaran'], item['about'], item['card_img']])
 

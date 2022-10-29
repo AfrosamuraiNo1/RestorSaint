@@ -4,7 +4,7 @@ import requests
 from bs4 import BeautifulSoup as BS
 import csv
 import time
-from all_web import data_link
+from ..all_web import data_link
 
 CSV = 'adress.csv'
 
