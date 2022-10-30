@@ -4,9 +4,12 @@ import requests
 from bs4 import BeautifulSoup as BS
 import csv
 import time
-from ..all_web import data_link
+from data_link import data_link
+import pathlib
+from pathlib import Path
 
-CSV = 'adress.csv'
+
+CSV = Path(pathlib.Path.home(),'projects','learn-web','data_csv','adress.csv')
 
 HOST = 'https://www.restoclub.ru'
 HEADERS = {
@@ -27,7 +30,8 @@ def get_content(html):
     for item in items:
         adress.append(
             {
-                'title': item.find('div', class_='place-map').get('data-address'), 
+                'name': item.find('span', class_='header__title').get_text(),
+                'title': item.find('div', class_='place-map').get('data-address'),
                 'about': item.find('div', class_='expandable-text__t').get_text()
             }
         )
@@ -36,9 +40,9 @@ def get_content(html):
 def save_doc(items, path):
     with open(path, 'w', newline='') as file:
         writer = csv.writer(file, delimiter=';')
-        writer.writerow(['Адрес заведения','Описание заведения'])
+        writer.writerow(['Название организации','Адрес заведения','Описание заведения'])
         for item in items:
-            writer.writerow([item['title'], item['about']])
+            writer.writerow([item['name'],item['title'], item['about']])
 
 
 def parser():
@@ -53,3 +57,6 @@ def parser():
             print('Error')
         time.sleep(1)
     save_doc(adress, CSV)
+
+if __name__ == "__main__":
+    parser()

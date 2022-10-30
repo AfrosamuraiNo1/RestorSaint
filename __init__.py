@@ -1,8 +1,6 @@
 from flask import Flask, render_template
 
-from webapp.model import db, News
-from webapp.config import WEATHER_DEFAULT_CITY
-from webapp.weather import weather_by_city
+
 
 def create_app():
     app = Flask(__name__)
