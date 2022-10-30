@@ -1,53 +1,49 @@
-
-from hashlib import new
-import re
-import requests
-from bs4 import BeautifulSoup as bs
 import pandas as pd
-import time
+from collections import defaultdict
+import re
 
-def data_link(): # Эта функция должна подставлять в запрос URL адресс в таком ввиде https://www.restoclub.ru/spb/place/porto-19
-    link = pd.read_csv(open("data_csv/cards.csv", 'r', encoding='UTF-8'), sep=';')
-    web_link = link[['Ссылка на заведение']]
-    data_link = web_link.to_string(header=False, index=False)
-    data = data_link.split()
-    return data
 
 def data_address(): # Эта функция должна обрабатывать адреса ("Тихоокеанская ул., 10, Санкт-Петербург")
     link = pd.read_csv(open("data_csv/adress.csv", 'r', encoding='UTF-8'), sep=';')
-    web_link = link[['Адрес заведения']]
-    data_link = web_link.to_string(header=False, index=False)
-    for data in data_link:
-        data = data_link.split('\n')
-        city_data = []
-        for address in data:
-            if 'г.' in address:
-                del address
-            else:
-                address = address.lstrip() + ', Санкт-Петербург'
-                city_data.append(address)
-        return city_data
+    web_link = link.set_index('Название организации').to_dict()['Адрес заведения']
+    reverse = defaultdict(list)
+    d = []
+    for key, value in web_link.items(): #Если в тексте есть город,удаляет строку. Меняет адреса добавляя в конце ' , Санкт-Петербург'.
+        if 'г.' in value:
+            del value
+        else:
+            value = value.lstrip() +' , Санкт-Петербург'
+            d.append(value)
+    print(d)
+            # patern = '(\S+\s)(\D+\s)(\d+)(\S+\s)'
+            # repl = r'\3 \1\2'
+            # text = d 
+            # number_house = []
+            # for item in text:  #меняет адреса ставя номер дома спереди.
+            #     if re.match(patern,item):
+            #         new_number_house = re.sub(patern,repl,item)
+            #         number_house.append(new_number_house)
+                    # prospekt = []
+                    # for prosp in number_house: #меняет адреса заменяет "пр." на "проспект".
+                    #     if 'пр.' in prosp:
+                    #         new_pospekt = re.sub('пр.', 'проспект', prosp)
+                    #         prospekt.append(new_pospekt)
+                    #     else:
+                    #         prospekt.append(prosp)                     
+                    #     return prospekt
+    #return number_house
 
-def data_about(): # Эта функция должна подставлять
-    link = pd.read_csv(open("data_csv/cards.csv", 'r', encoding='UTF-8'), sep=';')
-    web_link = link[['Название заведения'],['Инофрмация о заведение'],['Лого заведения']]
-    data_link = web_link.to_string(header=False, index=False)
-    for data in data_link:
-        data = data_link.split()
-    #     data_all_about = []
-    #     for about in data:
-    #         data_all_about.append(address)
-    # return data_all_about
- 
-data_about()
 
-# def data_name(): # Эта функция должна подставлять Названия заведений.
-#     link = pd.read_csv(open("data_csv/cards.csv", 'r', encoding='UTF-8'), sep=';')
-#     web_link = link[['Название заведения']]
-#     data_link = web_link.to_string(header=False, index=False)
-#     for name in data_link:
-#         name = data_link.split()
-#         data_names = []
-#         for about in name:
-#             data_names.append(about)
-#     return data_names
+# def prospekt():
+#     number_house = data_address()
+#     prospekt = []
+#     for prosp in number_house: #меняет адреса заменяет "пр." на "проспект".
+#         print(prosp)
+        # if 'пр.' in prosp:
+        #     new_pospekt = re.sub('пр.', 'проспект', prosp)
+        #     prospekt.append(new_pospekt)
+        # else:
+        #     prospekt.append(prosp)                     
+        # return prospekt
+
+print(data_address())
