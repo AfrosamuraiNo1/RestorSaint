@@ -1,7 +1,7 @@
 import csv
 
 def proces_restaurants_data():
-    with open('data_csv/address.csv', 'r') as f:
+    with open('data_csv/adress.csv', 'r') as f:
         restaurants = csv.DictReader(f, delimiter=';')
 
         proces_data = {}
