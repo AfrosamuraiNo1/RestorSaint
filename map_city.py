@@ -1,39 +1,26 @@
-from logging import logMultiprocessing
 import folium
 from functools import partial
 from geopy.geocoders import Nominatim
-#from all_web import data_address
+from all_web import data_address
 
 
-def geo_point():
+def geo_point(): #Создаёт из адресов гео точки с именами заведений.
     address_point = data_address()
-    for key, value in list(address_point.items()):
+    point_data = {}
+
+    for name, point in address_point.items():
         geolocator = Nominatim(user_agent='Afro$amuraiNo1')
         geocode = partial(geolocator.geocode,  language='RU')
-        location = geolocator.geocode(value)
+        location = geolocator.geocode(point)
         if location:
             location = (location.latitude, location.longitude)
-            address_point[key] = location
-    return address_point
-
-geolocator = Nominatim(user_agent='Afro$amuraiNo1')
-geocode = partial(geolocator.geocode,  language='RU')
-location = geolocator.geocode('1/12 ул. Пестеля, Санкт-Петербург') #'ул. Наличная 24к1, Санкт-Петербург' 'ул. Гороховая 49б, Санкт-Петербург' 'пр. Приморский 72, Санкт-Петербург'
-location = (location.latitude, location.longitude) #Наличная ул., 24, Санкт-Петербург, ул. Гороховая ул., 49 Санкт-Петербург, 'Приморский пр.72, Санкт-Петербург','Загородный проспект,15, Санкт-Петербург'
-print(location)
+            point_data[name] = location    
+    return(point_data)
 
 
-def map_marker():
-    marker = geo_point()
-    name = data_name()
-    name_and_marker= dict(zip(name,marker))
-    print(name_and_marker)
-    # city = folium.Map(location=[59.939099, 30.315877],zoom_start=11)
-    # for keys, values in name_and_marker:
-    #     folium.Marker(location=values,popur=keys,icon=folium.Icon(color='green')).add_to(city)
-    # return city.save('../tempalates/restaurants-spb.html')
-
-        
-
-#if __name__ == "__main__":
-#    map_marker()
+def map_marker(): #Cоздаёт на карте точки с именами.
+    name_and_marker = geo_point()
+    city = folium.Map(location=[59.939099, 30.315877],zoom_start=11)
+    for keys, values in name_and_marker.items():
+        folium.Marker(location=values,popup=keys,icon=folium.Icon(color='green')).add_to(city)
+    return city.save('tempalates/restaurants-spb.html')
