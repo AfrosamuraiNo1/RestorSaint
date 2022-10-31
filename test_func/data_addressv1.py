@@ -17,6 +17,24 @@ def data_address(): # Эта функция должна обрабатыват�
                 city_data.append(address)
         return city_data
 
+def data_address(): # Эта функция должна обрабатывать адреса ("Тихоокеанская ул., 10, Санкт-Петербург")
+    link = pd.read_csv(open('data_csv/adress.csv', 'r', encoding='UTF-8'), sep=';')
+    web_link = link[['Адрес заведения']]
+    data_link = web_link.to_string(header=False, index=False)
+    data = data_link.split('\n')
+    city_data = []
+    for address in data:
+        if 'г.' in address:
+            del address
+        else:
+            address = address.lstrip() + ', Санкт-Петербург'
+            city_data.append(address)
+        for all_address in city_data:
+            return all_address
+    
+
+print(data_address())
+
 
 def data_address(): # Эта функция должна обрабатывать адреса ("Тихоокеанская ул., 10, Санкт-Петербург")
     link = pd.read_csv(open("data_csv/adress.csv", 'r', encoding='UTF-8'), sep=';')
