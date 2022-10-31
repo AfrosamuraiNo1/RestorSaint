@@ -2,7 +2,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 
-from utils import proces_restaurants_data
+from all_web import data_address
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
@@ -22,7 +22,7 @@ class Place(db.Model):
 
 @app.route('/')
 def fill_db():
-    places = proces_restaurants_data()
+    places = data_address()
 
     for name, address in places.items():
         query = db.select(Place).filter_by(name=name)
