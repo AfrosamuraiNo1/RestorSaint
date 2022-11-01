@@ -1,7 +1,7 @@
 import folium
 from functools import partial
 from geopy.geocoders import Nominatim
-from all_web import data_address
+from webapp.utils_csv import data_address
 
 
 def geo_point(): #Создаёт из адресов гео точки с именами заведений.
