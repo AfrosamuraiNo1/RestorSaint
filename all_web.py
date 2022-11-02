@@ -33,19 +33,6 @@ def descrition_place(): # Эта функция обрабатывает опи�
     
     return place_data
 
-def descrition_place(): # Эта функция обрабатывает описание заведения.
-    with open("data_csv/address.csv", 'r') as f:
-        places = csv.DictReader(f, delimiter=';')
-
-        place_data = {}
-
-        for place in places:
-            name = place.get('Название организации')
-            all_places = place.get('Описание заведения').strip()
-            place_data[name] = all_places
-    
-    return place_data
-
 
 def title_place(): # Эта функция обрабатывает короткое описание заведения.
     with open("data_csv/cards.csv", 'r') as f:
@@ -59,9 +46,3 @@ def title_place(): # Эта функция обрабатывает коротк
             title_place_data[name] = title_all_places
     
     return title_place_data
-    
-
-
-
-
-        
