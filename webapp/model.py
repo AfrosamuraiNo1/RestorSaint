@@ -1,15 +1,13 @@
-#from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-#from flask_migrate import Migrate
 
 db = SQLAlchemy() 
 
 class Place(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(255))
-    title = db.Column(db.String(255))
-    address = db.Column(db.String(255))
-    descript_place = db.Column(db.Text)
+    name = db.Column(db.String(255),nullable=False)
+    info = db.Column(db.String(255),nullable=False)
+    address = db.Column(db.String(255),nullable=False)
+    description = db.Column(db.Text,nullable=False)
 
     def __repr__(self):
-        return f'Place: {self.name}{self.title}{self.address}{self.descrition_place}'
+        return f'Place: {self.name}{self.info}{self.address}{self.description}'

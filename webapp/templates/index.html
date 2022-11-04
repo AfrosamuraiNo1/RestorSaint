@@ -3,28 +3,24 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ page_title }}</title>
+    <title>{{ title }}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
   </head>
   <body>
     <div class="countainer">
-    <h1>{{ page_title }}</h1>
+    <h1>{{ title }}</h1>
     <div class="row">
         <div class="col-8">
-            <h2>Новости</h2>
-            {% for news in news_list %}
-            <h3><a href="{{ news.url }}">{{ news.title }}</a></h3>
-            <p>{{ news.published.strftime('%Y-%m-%d') }}</p>
+            <h2>Список заведений</h2>
+            {% for names in name %}
+            <h3><a>{{ names }}</a></h3>
+              <p>{{ title1 }}</p>
             <hr />
             {% endfor %}
         </div>
         <div class="col-4">
-            <h2>Прогноз погоды</h2>
-            {% if weather %}
-                {{weather.temp_C}}, ощущается как {{weather['FeelsLikeC']}}
-            {% else %}
-                Сервис погоды не доступен.
-            {% endif %}    
+            <h2>Карта города</h2>
+            <h3>{{ map }}</h3>
         </div>
     </div>
     </div>    

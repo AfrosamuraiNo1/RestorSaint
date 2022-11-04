@@ -1,6 +1,6 @@
 from webapp import create_app
-from webapp.utils_csv import data_base
+from webapp.utils_csv import base_restaurant
 
 app = create_app()
 with app.app_context():
-    data_base()
+    base_restaurant()

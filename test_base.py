@@ -75,7 +75,7 @@ def index():
         info = data['info']
 
         query = db.select(Place).filter_by(name=name)
-        exists = db.session.execute(query).first()
+        exists = db.session.execute(query).first
 
         if not exists:
             new_place = Place(
@@ -91,4 +91,4 @@ def index():
     return 'database filled'
 
 if __name__ == '__main':
-    app.run(debug=True, port=5001)
+    app.run(debug=True)

@@ -1,8 +1,9 @@
 import csv
+from distutils.log import info
 import re
-from unicodedata import name
 from webapp.model import db, Place
 from webapp.config import DATA_CSV1, DATA_CSV2
+
 
 def data_address(): # Эта функция обрабатывать адреса ("Тихоокеанская ул., 10, Санкт-Петербург")
     with open(DATA_CSV1, 'r') as f:
@@ -22,7 +23,6 @@ def data_address(): # Эта функция обрабатывать адрес�
                 processed_data[name] = full_address
     return processed_data
 
-#print(data_address())    
 
 def descrition_place(): # Эта функция обрабатывает описание заведения.
     with open(DATA_CSV1, 'r') as f:
@@ -33,10 +33,10 @@ def descrition_place(): # Эта функция обрабатывает опи�
         for place in places:
             name = place.get('Название организации')
             all_places = place.get('Описание заведения').strip()
+            all_places = re.sub('\xa0',' ', all_places)
+            all_places = re.sub('\n',' ', all_places)
             place_data[name] = all_places
     return place_data
-
-#print(descrition_place())
 
 
 def title_place(): # Эта функция обрабатывает короткое описание заведения.
@@ -51,16 +51,60 @@ def title_place(): # Эта функция обрабатывает коротк
             title_place_data[name] = title_places
     return title_place_data
 
+
 def data_base():
-    name = [name for name in data_address().keys()]
-    title = [name for name in title_place().values()]
-    address = [name for name in data_address().values()]
-    descript_place = [name for name in descrition_place().values()]
-    base_restaurant(name, title, address, descript_place)
+    merged_data = {}
 
+    with open(DATA_CSV1, 'r') as f:
+        restaurants = csv.DictReader(f, delimiter=';')
 
+        for restaurant in restaurants:
+            name = restaurant.get('Название организации')
+            description = restaurant.get('Описание заведения').strip()
+            description = re.sub('\xa0',' ', description)
+            description = re.sub('\n',' ', description)
+            address = restaurant.get('Адрес заведения').split()
+            bulding_number = address[-1]
+            street_name = ' '.join(address[0:-1])
+            new_pospekt = re.sub('пр.', 'проспект', street_name)
+            full_address = f'{bulding_number} {new_pospekt} , Санкт-Петербург'
+            
+            if 'г.' not in address:
+                merged_data[name] = {
+                    'address': full_address,
+                    'description': description,
+                }
 
-def base_restaurant(name, title, address, descript_place):
-    data_restaurant = Place(name=name, title=title, address=address, descript_place=descript_place)
-    db.session.add(data_restaurant)
-    db.session.commit()
+    with open(DATA_CSV2, 'r') as f:
+        restaurants = csv.DictReader(f, delimiter=';')
+
+        for restaurant in restaurants:
+            name = restaurant.get('Название заведения')
+            info = restaurant.get('Инофрмация о заведение')
+            if merged_data.get(name):
+                merged_data[name]['info'] = info
+    
+    return merged_data
+
+def base_restaurant():
+    places = data_base()
+
+    for name, data in places.items():
+        address = data['address']
+        description = data['description']
+        info = data['info']
+
+        query = db.select(Place).filter_by(name=name)
+        exists = db.session.execute(query).first()
+
+        if not exists:
+            new_place = Place(
+                name=name,
+                address=address,
+                description=description,
+                info=info,
+            )
+            db.session.add(new_place)
+    
+    return db.session.commit()
+
