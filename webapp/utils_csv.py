@@ -105,6 +105,6 @@ def base_restaurant():
                 info=info,
             )
             db.session.add(new_place)
-    
-    return db.session.commit()
+    db.session.commit()
+    return 'well done'
 
