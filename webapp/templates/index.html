@@ -12,9 +12,9 @@
     <div class="row">
         <div class="col-8">
             <h2>Список заведений</h2>
-            {% for names in name %}
-            <h3><a>{{ names }}</a></h3>
-              <p>{{ title1 }}</p>
+            {% for names in name_list %}
+            <h3><a href="{{ names.info }}">{{ names.name}}</a></h3>
+              <p>{{ names.info }}</p>
             <hr />
             {% endfor %}
         </div>

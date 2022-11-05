@@ -10,7 +10,7 @@ def create_app():
     @app.route("/")
     def index():
         title = "Рестораны Санкт-Петербурга"
-        name = db.session.execute(db.select(Place)).scalars()
-        return render_template('index.html',title=title, name=name)
+        name = Place.query.all()
+        return render_template('index.html',title=title, name_list=name)
     
     return app

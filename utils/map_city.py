@@ -13,8 +13,8 @@ def geo_point(): #Создаёт из адресов гео точки с име
         geocode = partial(geolocator.geocode,  language='RU')
         location = geolocator.geocode(point)
         if location:
-            location = (location.latitude, location.longitude)
-            point_data[name] = location    
+            coordinates = (location.latitude, location.longitude)
+            point_data[name] = coordinates    
     return(point_data)
 
 

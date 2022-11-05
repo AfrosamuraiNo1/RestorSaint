@@ -66,8 +66,8 @@ def data_base():
             address = restaurant.get('Адрес заведения').split()
             bulding_number = address[-1]
             street_name = ' '.join(address[0:-1])
-            new_pospekt = re.sub('пр.', 'проспект', street_name)
-            full_address = f'{bulding_number} {new_pospekt} , Санкт-Петербург'
+            new_prospekt = re.sub('пр.', 'проспект', street_name)
+            full_address = f'{bulding_number} {new_prospekt} , Санкт-Петербург'
             
             if 'г.' not in address:
                 merged_data[name] = {
