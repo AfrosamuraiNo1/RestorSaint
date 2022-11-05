@@ -1,6 +1,7 @@
 import csv
 import re
 
+
 def data_address(): # Эта функция должна обрабатывать адреса ("Тихоокеанская ул., 10, Санкт-Петербург")
     with open("data_csv/address.csv", 'r') as f:
         restaurants = csv.DictReader(f, delimiter=';') 
@@ -17,5 +18,5 @@ def data_address(): # Эта функция должна обрабатыват�
             if 'г.' not in address:
                 processed_data[name] = f'{bulding_number} {new_pospekt} , Санкт-Петербург'
     
-    return(processed_data)
+    return processed_data
 

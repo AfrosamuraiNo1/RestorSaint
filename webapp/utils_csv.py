@@ -1,5 +1,4 @@
 import csv
-from distutils.log import info
 import re
 from webapp.model import db, Place
 from webapp.config import DATA_CSV1, DATA_CSV2
@@ -85,6 +84,7 @@ def data_base():
                 merged_data[name]['info'] = info
     
     return merged_data
+
 
 def base_restaurant():
     places = data_base()

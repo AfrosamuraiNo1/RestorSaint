@@ -2,6 +2,7 @@ from flask import Flask, render_template
 
 from webapp.model import db, Place
 
+
 def create_app():
     app = Flask(__name__)
     app.config.from_pyfile('config.py')

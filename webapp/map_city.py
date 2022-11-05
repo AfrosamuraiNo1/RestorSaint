@@ -15,7 +15,7 @@ def geo_point(): #Создаёт из адресов гео точки с име
         if location:
             location = (location.latitude, location.longitude)
             point_data[name] = location    
-    return(point_data)
+    return point_data
 
 
 def map_marker(): #Cоздаёт на карте точки с именами.

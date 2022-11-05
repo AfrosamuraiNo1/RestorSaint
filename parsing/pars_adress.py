@@ -22,6 +22,7 @@ def get_html(url, params=''):
     r = requests.get(url, timeout=5, headers=HEADERS, params=params)
     return r
 
+
 def get_content(html): 
     soup = BS(html, 'html.parser')
     items = soup.find_all('div', class_='page__wrapper')
@@ -36,6 +37,7 @@ def get_content(html):
             }
         )
     return adress
+
 
 def save_doc(items, path):
     with open(path, 'w', newline='') as file:
