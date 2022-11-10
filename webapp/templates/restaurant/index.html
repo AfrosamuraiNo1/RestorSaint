@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="row">
+      <div class="col-8">
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <div class="alert alert-warning" role="alert">
+                {% for message in messages %}
+                    {{ message }}<br>
+                {% endfor %}
+            </div>
+            {% endif %}
+        {% endwith %}
+          <h2>Список заведений</h2>
+          {% for names in name_list %}
+          <h3><a href="{{ names.info }}">{{ names.name}}</a></h3>
+            <p>{{ names.info }}</p>
+          <hr />
+          {% endfor %}
+      </div>
+      <div class="col-4">
+          <h2>Карта города</h2>
+          <h3>{% include 'restaurants-spb.html' %}</h3>
+      </div>
+    </div>  
+{% endblock %}

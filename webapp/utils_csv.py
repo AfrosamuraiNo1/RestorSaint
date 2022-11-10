@@ -1,7 +1,7 @@
 import csv
-from distutils.log import info
 import re
-from webapp.model import db, Place
+from webapp.db import db 
+from webapp.restaurants.models import Place
 from webapp.config import DATA_CSV1, DATA_CSV2
 
 
