@@ -2,12 +2,12 @@
 
 {% block content %}
   <div class="row">
-      <div class="col-8">
+      <div class="col-4">
         {% with messages = get_flashed_messages() %}
           {% if messages %}
             <div class="alert alert-warning" role="alert">
                 {% for message in messages %}
-                    {{ message }}<br>
+                    {{ message }}
                 {% endfor %}
             </div>
             {% endif %}
@@ -21,7 +21,7 @@
       </div>
       <div class="col-4">
           <h2>Карта города</h2>
-          <h3>{% include 'restaurants-spb.html' %}</h3>
+          <h3></h3>
       </div>
     </div>  
 {% endblock %}
