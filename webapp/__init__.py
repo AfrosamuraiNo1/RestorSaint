@@ -21,7 +21,7 @@ app = Flask(__name__)
 
 @app.route('/map')
 def map():
-    return render_template('index.html', map='restaurants-spb.html')	
+    return render_template('restaurants-spb.html')	
 
 
 if __name__ == '__main__':
