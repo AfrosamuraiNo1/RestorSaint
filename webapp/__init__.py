@@ -10,7 +10,7 @@ from webapp.user.models import User
 
 
 def create_app():
-    app = Flask(__name__)
+    app = Flask(__name__, static_folder="static")
     app.config.from_pyfile('config.py')
     db.init_app(app)
     migrate = Migrate(app, db)

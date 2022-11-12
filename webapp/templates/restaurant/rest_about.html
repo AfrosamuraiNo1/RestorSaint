@@ -14,8 +14,8 @@
         {% endwith %}
           <h2>Список заведений</h2>
           {% for names in name_list %}
-          <h3><a href="{{ names.name }}">{{ names.name}}</a></h3>
-            <p>{{ names.info }}</p>
+          <h3><a>{{ names.description}}</a></h3>
+            <p>{{ names.address }}</p>
           <hr />
           {% endfor %}
       </div>
