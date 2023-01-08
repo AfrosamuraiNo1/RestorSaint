@@ -14,7 +14,7 @@ def login():
         return redirect(url_for('restaurants.index'))
     title = "Авторизация"
     login_form = LoginForm()
-    return render_template('user.login.html', page_title=title, form=login_form)
+    return render_template('user/login.html', page_title=title, form=login_form)
 
 @blueprint.route('/process-login', methods=['POST'])
 def process_login():

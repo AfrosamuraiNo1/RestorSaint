@@ -9,7 +9,6 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(128))
     role = db.Column(db.String(10), index=True)
     email = db.Column(db.String(50))
-
     
     @property
     def is_admin(self):

@@ -2,7 +2,7 @@
 
 {% block content %}
   <div class="row">
-      <div class="col-6">
+      <div class="col-5">
         {% with messages = get_flashed_messages() %}
           {% if messages %}
             <div class="alert alert-warning" role="alert">
@@ -12,16 +12,17 @@
             </div>
             {% endif %}
         {% endwith %}
-          <h2>Список заведений</h2>
+          <h1>Список заведений</h1>
           {% for names in name_list %}
-          <h3><a href="{{ names.name }}">{{ names.name}}</a></h3>
+          <h2><a href="{{ names.name }}">{{ names.name}}</a></h2>
             <p>{{ names.info }}</p>
           <hr />
           {% endfor %}
       </div>
       <div class="col-4">
-          <h2>Карта города</h2>
-          <object width="120%" height="500px" data= "{{ url_for('static',filename='restaurants-spb.html') }}"></object>
+          <h1>Карта города</h1>
+          <h2>Санкт-Петербург </h2>
+          <object width="150%" height="800px" data= "{{ url_for('static',filename='restaurants-spb.html') }}"></object>
       </div>
     </div>  
 {% endblock %}

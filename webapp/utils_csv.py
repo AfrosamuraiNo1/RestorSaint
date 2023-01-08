@@ -86,25 +86,25 @@ def data_base():
     
     return merged_data
 
-def base_restaurant():
-    places = data_base()
+# def base_restaurant():
+#     places = data_base()
 
-    for name, data in places.items():
-        address = data['address']
-        description = data['description']
-        info = data['info']
+#     for name, data in places.items():
+#         address = data['address']
+#         description = data['description']
+#         info = data['info']
 
-        query = db.select(Place).filter_by(name=name)
-        exists = db.session.execute(query).first()
+#         query = db.select(Place).filter_by(name=name)
+#         exists = db.session.execute(query).first()
 
-        if not exists:
-            new_place = Place(
-                name=name,
-                address=address,
-                description=description,
-                info=info,
-            )
-            db.session.add(new_place)
-    db.session.commit()
-    return 'well done'
+#         if not exists:
+#             new_place = Place(
+#                 name=name,
+#                 address=address,
+#                 description=description,
+#                 info=info,
+#             )
+#             db.session.add(new_place)
+#     db.session.commit()
+#     return 'well done'
 
