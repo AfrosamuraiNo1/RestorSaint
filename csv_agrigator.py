@@ -55,7 +55,6 @@ def title_place(): # Эта функция обрабатывает коротк
 
 def data_base():
     merged_data = {}
-
     with open(DATA_CSV1, 'r') as f:
         restaurants = csv.DictReader(f, delimiter=';')
 
