@@ -1,3 +1,15 @@
 {% extends "base.html" %}
 
-{% block content %}Контент админки{% endblock %}
+{% block content %}
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8"
+        <title>{{ title }}</title>
+    </head>
+    <body>
+        <h1>Flask Admin</h1>
+        <br>
+        <a href="/admin">In to admin</a>
+    </body>
+    </html>
+{% endblock %}

@@ -1,5 +1,4 @@
 from flask import Blueprint, render_template, flash
-from webapp.restaurants.map_city import geo_point
 from webapp.db import db
 import folium
 import os

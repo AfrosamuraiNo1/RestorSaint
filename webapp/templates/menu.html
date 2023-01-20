@@ -38,18 +38,18 @@
       </li>
       {% if current_user.is_admin %}
       <li class="nav-item">
-        <a href="{{ url_for('admin.admin_index') }}" class="nav-link">Админка</a>
+        <a href="{{ url_for('admin.index') }}" class="nav-link">Админка</a>
       </li>
       {% endif %}
       <li class="nav-item">
-        <a class="nav-link" href="{{ url_for('user.logout') }}">Выйти</a>
+        <a class="nav-link" href="{{ url_for('users_blueprint.logout') }}">Выйти</a>
       </li>
       {% else %}
       <li class="nav-item">
-        <a class="nav-link" href="{{ url_for('user.login') }}">Войти</a>
+        <a class="nav-link" href="{{ url_for('users_blueprint.login') }}">Войти</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{{ url_for('user.register') }}">Регистрация</a>
+        <a class="nav-link" href="{{ url_for('users_blueprint.register') }}">Регистрация</a>
       </li>
       {% endif %}
     </ul>
