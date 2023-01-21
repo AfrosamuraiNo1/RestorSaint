@@ -2,7 +2,6 @@ import folium
 from functools import partial
 from geopy.geocoders import Nominatim
 from csv_agrigator import data_base
-import re
 
 from folium.plugins import MarkerCluster
 from folium.plugins import Search
@@ -67,4 +66,4 @@ def visualize_locations_with_marker_cluster():
     ).add_to(m)
 
 
-    return m.save('spb.html')
+    return m.save('static/restaurants-spb.html')
