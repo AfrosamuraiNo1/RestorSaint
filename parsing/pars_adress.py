@@ -1,5 +1,3 @@
-from cgitb import html
-from signal import pause
 import requests
 from bs4 import BeautifulSoup as BS
 import csv
@@ -9,7 +7,10 @@ import pathlib
 from pathlib import Path
 
 
-CSV = Path(pathlib.Path.home(),'projects','learn-web','data_csv','adress.csv')
+# Путь доставки фаила с данными парсинга.
+# The delivery path of the parsing data file.
+CSV = Path(pathlib.Path.home(), 'projects', 'learn-web',
+           'data_csv', 'utils', 'adress.csv')
 
 HOST = 'https://www.restoclub.ru'
 HEADERS = {
@@ -19,16 +20,17 @@ HEADERS = {
 
 
 def get_html(url, params=''):
-    r = requests.get(url, timeout=5, headers=HEADERS, params=params)
-    return r
+    response = requests.get(url, timeout=5, headers=HEADERS, params=params)
+    return response
 
-def get_content(html): 
+
+def get_content(html):
     soup = BS(html, 'html.parser')
     items = soup.find_all('div', class_='page__wrapper')
     adress = []
 
-    for item in items:
-        adress.append(
+    for item in items:  # Выбирает информацию по классам
+        adress.append(  # selects information by class
             {
                 'name': item.find('span', class_='header__title').get_text(),
                 'title': item.find('div', class_='place-map').get('data-address'),
@@ -37,12 +39,15 @@ def get_content(html):
         )
     return adress
 
+
 def save_doc(items, path):
     with open(path, 'w', newline='') as file:
+        # Сохраняет в csv. Save in csv.
         writer = csv.writer(file, delimiter=';')
-        writer.writerow(['Название организации','Адрес заведения','Описание заведения'])
+        writer.writerow(
+            ['Название организации', 'Адрес заведения', 'Описание заведения'])
         for item in items:
-            writer.writerow([item['name'],item['title'], item['about']])
+            writer.writerow([item['name'], item['title'], item['about']])
 
 
 def parser():
@@ -52,11 +57,12 @@ def parser():
         html = get_html(url)
         if html.status_code == 200:
             adress.extend(get_content(html.text))
-            print('Создана точка.')    
+            print('Создана точка.')
         else:
             print('Error')
         time.sleep(1)
     save_doc(adress, CSV)
+
 
 if __name__ == "__main__":
     parser()

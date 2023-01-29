@@ -1,12 +1,16 @@
 import csv
 import re
 
-from webapp.config import DATA_CSV1, DATA_CSV2
+from config import DATA_CSV1, DATA_CSV2
 from functools import partial
 from geopy.geocoders import Nominatim
 
 
 def data_base():
+    """
+    Обработчик данных, полученных из csv. Проходится по адресам, редактирует под формат нужный картам.
+    Handler of data received from csv. It goes through the addresses, edits to the format required by the maps.
+    """
     merged_data = {}
 
     with open(DATA_CSV1, 'r') as f:
@@ -16,7 +20,8 @@ def data_base():
             description = restaurant.get('Описание заведения').strip()
             description = re.sub('\xa0', ' ', description)
             description = re.sub('\n', ' ', description)
-            address = restaurant.get('Адрес заведения').split() # ['пр.', 'Маршала', 'Блюхера', '6']
+            # ['пр.', 'Маршала', 'Блюхера', '6']
+            address = restaurant.get('Адрес заведения').split()
             geolocator = Nominatim(user_agent='Afro$amuraiNo1')
             geocode = partial(geolocator.geocode,  language='RU')
             location = geolocator.geocode(address)

@@ -8,6 +8,7 @@ from webapp.user.models import User
 
 from webapp.user.routes import users_bp
 
+
 @users_bp.route('/login')
 def login():
     if current_user.is_authenticated:
@@ -15,6 +16,7 @@ def login():
     title = "Авторизация"
     login_form = LoginForm()
     return render_template('user/login.html', page_title=title, form=login_form)
+
 
 @users_bp.route('/process-login', methods=['POST'])
 def process_login():
@@ -29,6 +31,7 @@ def process_login():
     flash('Неправильное имя пользователя или пароль')
     return redirect(url_for('users_blueprint.login'))
 
+
 @users_bp.route('/logout')
 def logout():
     logout_user()
@@ -41,14 +44,15 @@ def register():
         return redirect(url_for('restaurants.index'))
     form = RegistrationForm()
     title = "Регистрация"
-    return render_template('user/registration.html',page_title=title, form=form)
+    return render_template('user/registration.html', page_title=title, form=form)
 
 
 @users_bp.route('/process-reg', methods=['POST'])
 def process_reg():
     form = RegistrationForm()
     if form.validate_on_submit():
-        new_user = User(username=form.username.data,email=form.email.data, role='user')
+        new_user = User(username=form.username.data,
+                        email=form.email.data, role='user')
         new_user.set_password(form.password.data)
         db.session.add(new_user)
         db.session.commit()

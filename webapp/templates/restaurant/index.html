@@ -1,28 +1,26 @@
-{% extends "base.html" %}
-
-{% block content %}
-  <div class="row">
-      <div class="col-5">
-        {% with messages = get_flashed_messages() %}
-          {% if messages %}
-            <div class="alert alert-warning" role="alert">
-                {% for message in messages %}
-                    {{ message }}
-                {% endfor %}
-            </div>
-            {% endif %}
-        {% endwith %}
-          <h1>Список заведений</h1>
-          {% for names in name_list %}
-          <h2><a href="{{ names.name }}">{{ names.name}}</a></h2>
-            <p>{{ names.info }}</p>
-          <hr />
-          {% endfor %}
-      </div>
-      <div class="col-4">
-          <h1>Карта города</h1>
-          <h2>Санкт-Петербург </h2>
-          <object width="150%" height="800px" data= "{{ url_for('static',filename='restaurants-spb.html') }}"></object>
-      </div>
-    </div>  
+{% extends "base.html" %} {% block content %}
+<div class="row">
+  <div class="col-5">
+    {% with messages = get_flashed_messages() %} {% if messages %}
+    <div class="alert alert-warning" role="alert">
+      {% for message in messages %} {{ message }} {% endfor %}
+    </div>
+    {% endif %} {% endwith %}
+    <h1>Список заведений</h1>
+    {% for names in name_list %}
+    <h2><a href="{{ names.name }}">{{ names.name}}</a></h2>
+    <p>{{ names.info }}</p>
+    <hr />
+    {% endfor %}
+  </div>
+  <div class="col-4">
+    <h1>Карта города</h1>
+    <h2>Санкт-Петербург</h2>
+    <object
+      width="150%"
+      height="800px"
+      data="{{ url_for('static',filename='restaurants-spb.html') }}"
+    ></object>
+  </div>
+</div>
 {% endblock %}

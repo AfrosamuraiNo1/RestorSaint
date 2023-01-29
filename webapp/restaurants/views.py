@@ -6,11 +6,19 @@ from .models import Place
 
 blueprint = Blueprint('restaurants', __name__)
 
+# Главная страница
+# Home page
+
+
 @blueprint.route("/")
 def index():
     title = "Рестораны Санкт-Петербурга"
     name = Place.query.all()
     return render_template('restaurant/index.html', title=title, name_list=name)
+
+# Страница ресторана с картой и фото заведения.
+# Restaurant page with a map and a photo of the establishment.
+
 
 @blueprint.route("/<name>")
 def about(name):
@@ -32,5 +40,5 @@ def about(name):
         map = city.save(f'webapp/static/{name}/{name}.html')
     else:
         flash('Такое заведение есть!')
-    return render_template('restaurant/detail.html', restaurant=restaurant, map=street_place, 
-    photo1=place_photo1, photo2=place_photo2, photo3=place_photo3,)
+    return render_template('restaurant/detail.html', restaurant=restaurant, map=street_place,
+                           photo1=place_photo1, photo2=place_photo2, photo3=place_photo3,)

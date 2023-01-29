@@ -3,8 +3,12 @@ from functools import wraps
 from flask import current_app, flash, request, redirect, url_for
 from flask_login import config, current_user
 
+# Декоратор проверки пользователя
+# User verification decorator
+
+
 def admin_required(func):
-    @wraps(func)
+    @wraps(func)  # Сохраняет имя и опсиание функции __name__ и __doc__
     def decorated_view(*args, **kwargs):
         if request.method in config.EXEMPT_METHODS:
             return func(*args, **kwargs)

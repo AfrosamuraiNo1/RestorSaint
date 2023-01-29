@@ -5,19 +5,22 @@ from webapp import create_app
 
 app = create_app()
 
+
 def content_filling():
     geo = geo_point()
     with app.app_context():
-        for name, data in geo.items(): # В цикле заносит все данные в базу
+        # В цикле заносит все данные в базу # In cicle delivery data in base.
+        for name, data in geo.items():
             address = data['address']
             description = data['description']
             info = data['info']
-            latitude=data['latitude']
-            longitude=data['longitude']
+            latitude = data['latitude']
+            longitude = data['longitude']
             query = db.select(Place).filter_by(name=name)
             exists = db.session.execute(query).first()
             if not exists:
-                new_place = Place(name=name, info=info, address=address, description=description, latitude=latitude,longitude=longitude)
+                new_place = Place(name=name, info=info, address=address,
+                                  description=description, latitude=latitude, longitude=longitude)
                 db.session.add(new_place)
                 db.session.commit()
             else:
@@ -25,18 +28,19 @@ def content_filling():
         return 'well done'
 
 
-def update_content_filling(): #Обновляет координаты
+def update_content_filling():  # Обновляет координаты. Make new coordinates.
     geo = geo_point()
     with app.app_context():
         for name, data in geo.items():
             restaurant = Place.query.filter_by(name=name).first()
-            new_latitude = data['latitude'] 
+            new_latitude = data['latitude']
             new_longitude = data['longitude']
             if not name:
                 print('Нет совподений по имени!')
             else:
-                restaurant.latitude=new_latitude
-                restaurant.longitude=new_longitude
+                restaurant.latitude = new_latitude
+                restaurant.longitude = new_longitude
                 db.session.commit()
+
 
 update_content_filling()
