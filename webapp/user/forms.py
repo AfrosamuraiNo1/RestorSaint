@@ -15,7 +15,7 @@ We also use render_kw={"class": "form-control"} for the appearance.
 class LoginForm(FlaskForm):
     username = StringField('Имя пользователя', validators=[
                            DataRequired()], render_kw={"class": "form-control"})
-    password = PasswordField('Пароль', validators=[DataRequired()], render_kw={
+    password_plaintext = PasswordField('Пароль', validators=[DataRequired()], render_kw={
                              "class": "form-control"})
     submit = SubmitField('Отправить', render_kw={"class": "btn btn-primary"})
     remember_me = BooleanField('Запомнить меня', default=True, render_kw={
@@ -27,10 +27,10 @@ class RegistrationForm(FlaskForm):
                            DataRequired()], render_kw={"class": "form-control"})
     email = StringField('Email', validators=[DataRequired(), Email()], render_kw={
                         "class": "form-control"})
-    password = PasswordField('Пароль', validators=[DataRequired()], render_kw={
+    password_plaintext = PasswordField('Пароль', validators=[DataRequired()], render_kw={
                              "class": "form-control"})
-    password2 = PasswordField('Повторите пароль', validators=[
-                              DataRequired(), EqualTo('password')], render_kw={"class": "form-control"})
+    password_plaintext2 = PasswordField('Повторите пароль', validators=[
+                              DataRequired(), EqualTo('password_plaintext')], render_kw={"class": "form-control"})
     submit = SubmitField('Отправить!', render_kw={"class": "btn btn-primary"})
 
     def validate_username(self, username):

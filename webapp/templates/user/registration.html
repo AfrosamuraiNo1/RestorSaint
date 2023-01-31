@@ -11,10 +11,10 @@ get_flashed_messages() %} {% if messages %} {% for message in messages %}
       </div>
       <div class="form-group">{{ form.email.label }} {{ form.email() }}</div>
       <div class="form-group">
-        {{ form.password.label }} {{ form.password() }}
+        {{ form.password_plaintext.label }} {{ form.password_plaintext() }}
       </div>
       <div class="form-group">
-        {{ form.password2.label }} {{ form.password2() }}
+        {{ form.password_plaintext2.label }} {{ form.password_plaintext2() }}
       </div>
       {{ form.submit }}
     </form>

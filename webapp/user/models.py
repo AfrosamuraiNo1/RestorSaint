@@ -33,6 +33,12 @@ class User(db.Model, UserMixin):
     def set_password(self, password_plaintext: str):
         self.password_hashed = self._generate_password_hash(password_plaintext)
 
+    # def set_password_hashed(self, password_plaintext):
+    #     self.password_hashed = generate_password_hash(password_plaintext)
+
+    # def check_password(self, password_hashed):
+    #     return check_password_hash(self.password_hashed, password_hashed)
+
     @staticmethod
     def _generate_password_hash(password_plaintext):
         return generate_password_hash(password_plaintext)
@@ -55,16 +61,10 @@ class User(db.Model, UserMixin):
     def get_id(self):
         """Return the user ID as a unicode string (`str`)."""
         return str(self.id)
-
+    
     @property
     def is_admin(self):
         return self.role == 'admin'
-
-    def set_password_hashed(self, password_hashed):
-        self.password_hashed = generate_password_hash(password_hashed)
-
-    def check_password_hashed(self, password_hashed):
-        return check_password_hash(self.password_hashed, password_hashed)
 
     def __repr__(self):
         return '<User {}>'.format(self.username)
