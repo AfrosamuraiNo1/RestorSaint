@@ -3,6 +3,9 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 from datetime import datetime
 from webapp.db import db
+from faker import Faker
+
+fake = Faker()
 
 
 class User(db.Model, UserMixin):
@@ -27,17 +30,13 @@ class User(db.Model, UserMixin):
         self.password_hashed = self._generate_password_hash(password_plaintext)
         self.registered_on = datetime.now()
 
-    def is_password_correct(self, password_plaintext: str):
-        return check_password_hash(self.password_hashed, password_plaintext)
+    def is_password_correct(self, password_hashed: str):
+        if self.password_hashed == None:
+            return None == fake.name()
+        return check_password_hash(self.password_hashed,  password_hashed)
 
-    def set_password(self, password_plaintext: str):
-        self.password_hashed = self._generate_password_hash(password_plaintext)
-
-    # def set_password_hashed(self, password_plaintext):
-    #     self.password_hashed = generate_password_hash(password_plaintext)
-
-    # def check_password(self, password_hashed):
-    #     return check_password_hash(self.password_hashed, password_hashed)
+    def set_password(self, password_hashed: str):
+        self.password_hashed = self._generate_password_hash(password_hashed)
 
     @staticmethod
     def _generate_password_hash(password_plaintext):
@@ -61,7 +60,7 @@ class User(db.Model, UserMixin):
     def get_id(self):
         """Return the user ID as a unicode string (`str`)."""
         return str(self.id)
-    
+
     @property
     def is_admin(self):
         return self.role == 'admin'

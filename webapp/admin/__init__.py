@@ -2,6 +2,7 @@ from flask_admin import expose, Admin
 from webapp import app
 from webapp.db import db
 from webapp.user.models import User
+from webapp.user.decorators import admin_required
 from webapp.restaurants.models import Place
 from flask_admin.contrib.sqla import ModelView
 import flask_admin
@@ -12,6 +13,7 @@ import flask_admin
 
 class MyHomeView(flask_admin.AdminIndexView):
     @expose('/')
+    @admin_required
     def index(self):
         title = 'Панель управления'
         return self.render('admin/index.html', title=title)
