@@ -26,15 +26,22 @@
 ## Installation
 
 Установите зависимости.
-bash
+```bash
   python -m pip install -r requirements.txt
+```  
 Сделать скрипт исполняемым на Linux.
-bash
+```bash
   chmod +x run.sh
+```  
 Запустить скрипт на Linux.
-bash
+```bash
   ./run.sh
+```  
 Перейменовать(.bat) и запустить скрипт на Windows.
-bash
+```bash
   run.bat
+```
 ## Running Tests
+```bash
+  pytest
+```  
